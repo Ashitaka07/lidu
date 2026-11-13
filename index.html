@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="基于李白、杜甫诗句相似关系数据的可视化阅读网站。">
+  <title>两峰一江｜李杜诗句互文图谱</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main>
+    <section class="hero" id="top">
+      <div class="mist mist-a"></div><div class="mist mist-b"></div>
+      <div class="hero-copy">
+        <p class="eyebrow">唐诗 · 句间关系图谱</p>
+        <h1>两峰一江</h1>
+        <p class="subtitle">李杜诗句互文图谱</p>
+        <p class="intro">循每一条真实的相似关系，读两位诗人在句与句之间的相望。</p>
+        <a class="scroll-link" href="#explore">展卷入江 <span>↓</span></a>
+      </div>
+      <div class="portraits" aria-label="李白与杜甫肖像">
+        <figure class="poet li"><img src="assets/li-bai.jpg" alt="李白肖像"><figcaption>李白</figcaption></figure>
+        <div class="river-line" aria-hidden="true"><i></i><i></i><i></i></div>
+        <figure class="poet du"><img src="assets/du-fu.jpg" alt="杜甫肖像"><figcaption>杜甫</figcaption></figure>
+      </div>
+      <p class="hero-note">所有数字与对读均由随附数据文件即时计算；相似度不等同于引用或影响关系。</p>
+    </section>
+
+    <section class="section overview" aria-labelledby="overview-title">
+      <p class="eyebrow">一卷概览</p><h2 id="overview-title">千句相逢，隔江相望</h2>
+      <div class="stat-grid" id="stats" aria-live="polite"><p class="loading">正在展读原始数据……</p></div>
+      <div class="method-note">数据每行对应一组“李白诗句—杜甫诗句”关系。诗句由“诗歌 ID + 句序”唯一定位；本页未补写任何原数据之外的诗文或生平信息。</div>
+    </section>
+
+    <section class="section explorer" id="explore" aria-labelledby="explore-title">
+      <div class="section-heading"><div><p class="eyebrow">江图</p><h2 id="explore-title">句间回响</h2></div><p class="heading-note">拖动门槛，让江上留下更清晰的回声。</p></div>
+      <div class="controls">
+        <label for="threshold">相似度门槛 <output id="thresholdValue">80.00%</output></label>
+        <input id="threshold" type="range" min="7000" max="10000" value="8000" step="25">
+        <label class="field-label" for="search">寻句</label>
+        <input id="search" type="search" placeholder="输入诗题、诗句或 ID" autocomplete="off">
+      </div>
+      <div class="distribution"><div class="distribution-head"><span>相似度分布</span><span id="activeCount">—</span></div><div id="histogram" class="histogram" aria-label="相似度分布图"></div></div>
+      <div class="network-wrap">
+        <div class="network-head"><span class="label-li">李白诗句簇</span><span>悬停节点，查看一跳关联；点击节点，展开对读卷</span><span class="label-du">杜甫诗句簇</span></div>
+        <div id="network" class="network" role="img" aria-label="李白和杜甫诗句之间的相似关系网络图"></div>
+      </div>
+      <div class="explorer-grid">
+        <div class="relation-panel">
+          <div class="panel-top"><div><span class="label-li">李白</span><span class="panel-divider">⇄</span><span class="label-du">杜甫</span></div><span id="resultCount">—</span></div>
+          <div id="relationList" class="relation-list" aria-live="polite"></div>
+          <button id="moreButton" class="more-button" type="button">展开更多关系</button>
+        </div>
+        <aside id="reader" class="reader" aria-live="polite">
+          <p class="reader-mark">对读</p><h3>从江图中择一条关系</h3><p>这里将呈现诗题、原句、精确相似度与原始定位 ID。</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section reading" aria-labelledby="reading-title">
+      <p class="eyebrow">读法</p><h2 id="reading-title">由远而近，回到诗句</h2>
+      <div class="steps"><article><span>一</span><h3>先观江势</h3><p>从阈值和分布判断可阅读的关系密度。</p></article><article><span>二</span><h3>再寻一诗</h3><p>以诗题、诗句或原始 ID 定位，查看其跨岸关联。</p></article><article><span>三</span><h3>后作对读</h3><p>保留数据的相似度，也保留文本解释的开放性。</p></article></div>
+    </section>
+  </main>
+  <footer><span>两峰一江 · 李杜诗句互文图谱</span><span>静态网站，可部署于 GitHub Pages</span></footer>
+  <script src="assets/lidu-relations.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
